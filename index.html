@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07121c">
+  <title>GASBOUND // Gas Law Campaign</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="game-shell">
+    <section class="screen menu-screen" id="menuScreen" aria-labelledby="gameTitle">
+      <div class="menu-grid"></div>
+      <header class="topline">
+        <span class="brand-mark">GB<span> // </span>07</span>
+        <span class="topline-status"><i class="status-dot"></i> FACILITY NETWORK: ONLINE</span>
+      </header>
+      <div class="menu-content">
+        <div class="logo-lockup">
+          <div class="logo-emblem" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div>
+            <p class="eyebrow">GAS LAW SIMULATION PROGRAM</p>
+            <h1 id="gameTitle">GAS<span>BOUND</span></h1>
+          </div>
+        </div>
+        <p class="menu-copy">When pressure rises, knowledge is your only way out.</p>
+        <div class="menu-actions">
+          <button class="button button-primary" id="startButton"><span>01</span> START EXPERIMENT <b>↗</b></button>
+          <button class="button button-quiet" id="continueButton"><span>02</span> CONTINUE <b>↗</b></button>
+          <button class="button button-quiet" id="archiveButton"><span>03</span> STAGE ARCHIVE <b>↗</b></button>
+          <button class="button button-quiet" id="rosterButton"><span>04</span> ASSISTANT ROSTER <b>↗</b></button>
+          <button class="button button-quiet" id="settingsButton"><span>05</span> SETTINGS <b>↗</b></button>
+        </div>
+        <div class="menu-note"><span class="line"></span><span>AUTHORIZED PERSONNEL ONLY</span><span class="line"></span></div>
+      </div>
+      <!--
+        ===== EDITABLE ART: MAIN-MENU BACKDROP =====
+        This background is drawn with CSS, not an image file. To use your own art,
+        replace these decorative elements with an <img> and update .menu-backdrop
+        in style.css. The menu text and buttons are separate and will stay on top.
+      -->
+      <div class="menu-backdrop" aria-hidden="true">
+        <div class="backdrop-ring ring-one"></div><div class="backdrop-ring ring-two"></div>
+        <div class="backdrop-cylinder"><div class="cylinder-core"></div></div>
+        <div class="backdrop-label">CHAMBER / 01</div>
+      </div>
+      <footer class="menu-footer"><span>ORBITAL RESEARCH COMPLEX · SECTOR 07</span><span>BUILD 01.04 // OFFLINE READY</span></footer>
+    </section>
+
+    <section class="screen facility-screen hidden" id="hubScreen" aria-label="Facility hub">
+      <header class="facility-header">
+        <a class="hud-logo" href="#" id="hubLogo">GAS<span>BOUND</span><small>ORBITAL RESEARCH COMPLEX</small></a>
+        <div class="facility-status"><i class="status-dot"></i> FACILITY NETWORK ONLINE <span>SECTOR 07</span></div>
+        <button class="button button-quiet compact-button" id="hubMenuButton">RETURN TO MAIN MENU <b>↗</b></button>
+      </header>
+      <div class="facility-main">
+        <div class="facility-title"><span class="eyebrow">CENTRAL RESEARCH FACILITY / HUB</span><h1>Welcome back, <span>Researcher.</span></h1><p>Select an operation or review your experimental record.</p></div>
+        <div class="progress-strip panel">
+          <div class="progress-emblem">GB<span>07</span></div>
+          <div class="progress-copy"><span>RESEARCH CLEARANCE</span><strong id="hubRank">ROOKIE RESEARCHER</strong></div>
+          <div class="progress-meter"><div class="progress-track"><i id="progressBar"></i></div><span id="progressSummary">0 / 8 OPERATIONS CLEARED</span></div>
+          <div class="current-operation"><span>CURRENT OPERATION</span><strong id="currentOperation">ORIENTATION</strong></div>
+        </div>
+        <div class="hub-grid">
+          <section class="hub-stage-panel panel">
+            <div class="panel-heading"><span>OPERATION CONSOLE</span><span class="panel-index">GB—07</span></div>
+            <div class="hub-stage-art"><div class="hub-orbit orbit-a"></div><div class="hub-orbit orbit-b"></div><div class="hub-hub-core"><span>GB</span><b>LAB<br>CORE</b></div><span class="orbit-tag tag-one">BOYLE</span><span class="orbit-tag tag-two">THERMAL</span><span class="orbit-tag tag-three">GAS / 07</span></div>
+            <h2>Choose your next experiment.</h2>
+            <p>Each chamber isolates a different gas-law relationship. Complete operations to earn clearance for the next sector.</p>
+            <button class="button button-primary hub-primary" id="stageSelectButton"><span>01</span> OPEN STAGE SELECTION <b>↗</b></button>
+          </section>
+          <section class="hub-nav-panel panel">
+            <div class="panel-heading"><span>FACILITY ACCESS</span><span class="panel-index">ONLINE</span></div>
+            <button class="hub-nav-button" id="hubArchiveButton"><span class="nav-symbol">▤</span><span><b>MISSION ARCHIVE</b><small>Browse all gas law operations</small></span><i>↗</i></button>
+            <button class="hub-nav-button" id="hubLogButton"><span class="nav-symbol">≡</span><span><b>OBSERVATION LOG</b><small>Review your previous experiments</small></span><i>↗</i></button>
+            <button class="hub-nav-button" id="hubRosterButton"><span class="nav-symbol">◈</span><span><b>ASSISTANT ROSTER</b><small>Scientific support personnel</small></span><i>↗</i></button>
+            <button class="hub-nav-button" id="hubSettingsButton"><span class="nav-symbol">⚙</span><span><b>SETTINGS</b><small>Display and progress options</small></span><i>↗</i></button>
+            <div class="hub-last-record"><span>LAST CLEARED</span><strong id="lastCleared">NO OPERATIONS CLEARED</strong><small id="completedStages">Your research record is ready.</small></div>
+          </section>
+        </div>
+        <section class="stage-preview panel">
+          <div class="panel-heading"><span>STAGE STATUS</span><button class="text-button" id="viewStagesButton">VIEW ALL OPERATIONS ↗</button></div>
+          <div class="stage-mini-list" id="stageMiniList"></div>
+        </section>
+      </div>
+      <footer class="lab-footer"><span>GB-07 <i>•</i> RESEARCH HUB</span><span>LOCAL PROGRESSION AUTO-SAVED</span><span>OFFLINE READY</span></footer>
+    </section>
+
+    <section class="screen stage-select-screen hidden" id="stageSelectScreen" aria-label="Stage selection">
+      <header class="facility-header">
+        <a class="hud-logo" href="#" id="stageSelectLogo">GAS<span>BOUND</span><small>OPERATION SELECT</small></a>
+        <div class="facility-status"><i class="status-dot"></i> SELECT AN UNLOCKED OPERATION</div>
+        <button class="button button-quiet compact-button" id="stageSelectBack">← RETURN TO HUB</button>
+      </header>
+      <div class="stage-select-content">
+        <div class="facility-title"><span class="eyebrow">OPERATION DIRECTORY / 00—07</span><h1>Stage <span>Selection</span></h1><p>Clear an operation to unlock the next. Completed operations remain available for replay.</p></div>
+        <div class="stage-card-grid" id="stageCardGrid"></div>
+        <p class="stage-select-note"><i class="status-dot"></i> PROGRESS SAVES AUTOMATICALLY ON THIS DEVICE</p>
+      </div>
+      <footer class="lab-footer"><span>GB-07 <i>•</i> OPERATION DIRECTORY</span><span>LOCKED STAGES CANNOT BE ENTERED</span><span>FACILITY ACCESS</span></footer>
+    </section>
+
+    <section class="screen lab-screen hidden" id="labScreen" aria-label="Pressure Breach laboratory">
+      <header class="hud-header">
+        <a class="hud-logo" href="#" id="labLogo" aria-label="Return to facility hub">GAS<span>BOUND</span><small id="labOperationCode">SIMULATION // 00</small></a>
+        <div class="mission-heading"><span class="eyebrow" id="missionEyebrow">ACTIVE OPERATION / 00</span><strong id="missionHeading">ORIENTATION</strong></div>
+        <div class="header-right"><span class="live-status"><i class="status-dot"></i> LIVE</span><button class="icon-button pause-button" id="pauseButton" aria-label="Pause experiment">Ⅱ</button><button class="icon-button" id="helpButton" aria-label="Show controls">?</button></div>
+      </header>
+
+      <div class="lab-layout">
+        <aside class="mission-rail panel">
+          <div class="panel-heading"><span id="missionPanelTitle">MISSION BRIEF</span><span class="panel-index" id="stageBadge">00—A</span></div>
+          <div class="objective-tag"><span class="warning-icon">!</span> OBJECTIVE</div>
+          <h2 id="stageTitle">Stabilize the<br>pressure breach.</h2>
+          <p class="brief-copy" id="stageIntro"></p>
+          <div class="objective-target"><span id="challengeTargetLabel">CHALLENGE</span><strong id="challengeCounter">01 <small>/ 03</small></strong></div>
+          <div class="conditions">
+            <div class="section-label">CONSTANT CONDITIONS</div>
+            <div id="constantList"></div>
+          </div>
+          <div class="law-card">
+            <div class="section-label">RELEVANT PRINCIPLE</div>
+            <strong id="lawName">Boyle's Law</strong>
+            <div class="equation" id="lawEquation">P₁V₁ = P₂V₂</div>
+            <small id="lawDescription"></small>
+          </div>
+        </aside>
+
+        <section class="lab-center" aria-label="Gas chamber controls">
+          <div class="scene-toolbar"><div><span class="scene-kicker">TEST CHAMBER</span><strong>CONTAINMENT UNIT / C-04</strong></div><div class="scene-coordinates">X: 04.21 <span>/</span> Y: 11.08</div></div>
+          <!--
+            ===== EDITABLE ART: LABORATORY SCENE =====
+            The room, chamber, gauge, and exit are HTML/CSS shapes. Edit the
+            .lab-scene and chamber styles in style.css to recolor them, or replace
+            only the wall/floor background with your own image. Keep the chamber
+            and controls in place so the puzzle remains interactive.
+          -->
+          <div class="lab-scene">
+            <div class="scene-wall-grid"></div>
+            <div class="wall-label wall-label-left">WARNING<br><b>HIGH PRESSURE</b><span>KEEP CLEAR</span></div>
+            <div class="wall-light"></div>
+            <div class="chamber-unit">
+              <div class="chamber-top"><span id="chamberTitle">SEALED GAS CHAMBER</span><span class="chamber-led"></span></div>
+              <div class="chamber-shell">
+                <div class="chamber-glass">
+                  <div class="gas-glow"></div>
+                  <div class="particles" id="particles" aria-hidden="true"></div>
+                  <div class="piston" id="piston"><div class="piston-rod"></div><div class="piston-head"></div></div>
+                  <div class="chamber-measure"><span>VOLUME</span><b id="chamberVolume">4.0 L</b></div>
+                  <div class="glass-mark mark-a"></div><div class="glass-mark mark-b"></div><div class="glass-mark mark-c"></div>
+                </div>
+              </div>
+              <div class="chamber-base"><span id="chamberBaseLabel">THERMAL REGULATOR</span><span class="base-temp" id="temperatureReadout">300 K <i>●</i></span></div>
+              <div class="chamber-foot"></div>
+            </div>
+            <div class="gauge-unit">
+              <div class="gauge-label"><span id="gaugeVariableLabel">CHAMBER PRESSURE</span> <span id="gaugeUnit">kPa</span></div>
+              <div class="gauge-face">
+                <div class="gauge-tick tick-1"></div><div class="gauge-tick tick-2"></div><div class="gauge-tick tick-3"></div><div class="gauge-tick tick-4"></div><div class="gauge-tick tick-5"></div>
+                <span class="gauge-number number-low">0</span><span class="gauge-number number-mid">100</span><span class="gauge-number number-high">300</span>
+                <div class="gauge-needle" id="gaugeNeedle"><i></i></div><div class="gauge-hub"></div>
+                <div class="gauge-reading"><strong id="pressureReadout">100</strong><small id="pressureUnit">kPa</small></div>
+              </div>
+              <div class="gauge-status" id="gaugeStatus"><i></i> NOMINAL</div>
+            </div>
+            <div class="exit-door" id="exitDoor">
+              <div class="door-frame"><div class="door-panel"><span class="door-mark">EXIT<br><small>AUTHORIZED ACCESS ONLY</small></span><span class="door-lock" id="doorLock">■</span></div></div>
+              <span class="exit-label" id="exitLabel">LOCKED</span>
+            </div>
+            <div class="floor-grid"></div>
+            <div class="floor-line"></div>
+            <div class="scene-caption"><span id="sceneEnvironment">ATMOSPHERIC CONTROL BAY</span> <span>CAM 01 / SECURE</span></div>
+          </div>
+          <div class="instrument-row">
+            <div class="instrument-card pressure-card"><span class="instrument-label" id="pressureCardLabel">PRESSURE</span><strong><span id="pressureValue">100</span><small id="pressureCardUnit">kPa</small></strong><div class="microbar"><i id="pressureBar"></i></div><span class="instrument-foot">LIVE CALCULATION</span></div>
+            <div class="instrument-card"><span class="instrument-label">VOLUME</span><strong><span id="volumeValue">4.0</span><small>L</small></strong><span class="instrument-foot" id="volumeFoot">VARIABLE / V</span></div>
+            <div class="instrument-card"><span class="instrument-label">TEMPERATURE</span><strong><span id="temperatureValue">300</span><small>K</small></strong><span class="instrument-foot" id="temperatureFoot">CONSTANT / T</span></div>
+            <div class="instrument-card target-card"><span class="instrument-label" id="targetCardLabel">TARGET READING</span><strong><span id="targetValue">200</span><small id="targetUnit">kPa</small></strong><span class="instrument-foot" id="pressureDelta">CHALLENGE</span></div>
+          </div>
+        </section>
+
+        <aside class="right-rail">
+          <section class="control-panel panel">
+            <div class="panel-heading"><span>CONTROL PANEL</span><span class="control-state"><i></i> ACTIVE</span></div>
+            <label class="volume-label" for="volumeSlider"><span id="controlLabel">PISTON DISPLACEMENT</span><b><span id="sliderVolume">4.0</span> <span id="controlUnit">L</span></b></label>
+            <div class="slider-wrap"><span id="sliderMin">0.5</span><input id="volumeSlider" type="range" min="0.5" max="5" step="0.1" value="4" aria-label="Adjust experimental variable"><span id="sliderMax">5.0</span></div>
+            <div class="secondary-control hidden" id="secondaryControlGroup">
+              <label class="volume-label" for="secondarySlider"><span id="secondaryControlLabel">SECONDARY VARIABLE</span><b><span id="secondaryValue">300</span> <span id="secondaryUnit">K</span></b></label>
+              <div class="slider-wrap"><span id="secondaryMin">150</span><input id="secondarySlider" type="range" min="150" max="700" step="5" value="300" aria-label="Adjust secondary variable"><span id="secondaryMax">700</span></div>
+            </div>
+            <div class="slider-hint" id="sliderHint">DRAG TO ADJUST CHAMBER VOLUME</div>
+            <div class="step-controls"><button id="decreaseButton" aria-label="Decrease volume">−</button><span>FINE ADJUST</span><button id="increaseButton" aria-label="Increase volume">+</button></div>
+            <div class="answer-area">
+              <label for="answerInput" id="answerLabel">CALCULATED FINAL VOLUME</label>
+              <div class="answer-input-wrap"><input id="answerInput" type="number" min="0.1" step="0.1" placeholder="Enter result" inputmode="decimal"><span id="answerUnit">L</span></div>
+              <label class="law-select-label hidden" id="lawSelectLabel" for="lawSelect">IDENTIFY THE GAS LAW</label>
+              <select class="law-select hidden" id="lawSelect"><option value="">Select a relationship</option><option value="boyle">Boyle's Law</option><option value="charles">Charles's Law</option><option value="gayLussac">Gay-Lussac's Law</option><option value="avogadro">Avogadro's Law</option><option value="combined">Combined Gas Law</option><option value="ideal">Ideal Gas Law</option></select>
+              <button class="button button-submit" id="submitButton">SUBMIT MEASUREMENT <b>→</b></button>
+              <p class="feedback" id="feedback" aria-live="polite">Adjust the chamber, then submit your calculated volume.</p>
+            </div>
+          </section>
+
+          <section class="assistant-card panel" aria-label="ANALYST assistant">
+            <div class="panel-heading"><span>FIELD SUPPORT</span><span class="assistant-live"><i class="status-dot"></i> CONNECTED</span></div>
+            <div class="assistant-main">
+              <!--
+                ===== EDITABLE ART: ANALYST PORTRAIT =====
+                Replace the hair/face/collar elements with:
+                <img class="analyst-portrait" src="images/analyst.png" alt="">
+                Keep the outer .analyst-avatar container for the portrait frame.
+              -->
+              <div class="analyst-avatar" aria-hidden="true"><div class="avatar-hair"></div><div class="avatar-face"><i class="avatar-eye eye-left"></i><i class="avatar-eye eye-right"></i><span class="avatar-mouth"></span></div><div class="avatar-collar"></div><span class="avatar-mark">A</span></div>
+              <div class="assistant-intro"><span>ANALYST <b>//</b> SCIENCE SUPPORT</span><p id="assistantMessage">Chamber readings are stable. What do you notice about pressure when volume changes?</p></div>
+            </div>
+            <button class="hint-button" id="hintButton"><span>REQUEST A HINT</span><b id="hintCounter">HINT 01 / 03</b><i>↗</i></button>
+          </section>
+
+          <section class="log-panel panel">
+            <div class="panel-heading"><span>OBSERVATION LOG</span><span class="log-count" id="logCount">01 ENTRIES</span></div>
+            <div class="log-body" id="logBody" aria-live="polite">
+              <div class="log-entry"><span class="log-index">01</span><div><strong>BASELINE RECORDED</strong><small>P₁ = 100 kPa · V₁ = 4.0 L</small></div><time>00:00</time></div>
+              <div class="log-constants"><span>CONSTANTS</span><b>T = 300 K</b><b>n = FIXED</b></div>
+            </div>
+            <div class="log-foot"><span>LOCAL RECORD / C-04</span><span>● AUTO-SAVE</span></div>
+          </section>
+        </aside>
+      </div>
+      <footer class="lab-footer"><span>GB-07 <i>•</i> <b id="footerStageName">EXPERIMENT</b></span><span>USE <b>← →</b> TO ADJUST VARIABLE</span><span>FACILITY TIME <b id="facilityTime">00:00</b></span></footer>
+    </section>
+
+    <div class="modal-backdrop hidden" id="infoModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-panel panel"><button class="modal-close" id="closeModal" aria-label="Close dialog">×</button><span class="eyebrow">GASBOUND / FACILITY DATABASE</span><h2 id="modalTitle">MISSION ARCHIVE</h2><div id="modalContent"></div></div>
+    </div>
+    <div class="completion-overlay hidden" id="completionOverlay" role="dialog" aria-modal="true" aria-labelledby="completionTitle">
+      <div class="completion-card results-card">
+        <div class="complete-symbol">✓</div><p class="eyebrow" id="resultEyebrow">OPERATION CLEAR</p>
+        <h2 id="completionTitle">EXPERIMENT<br><span>COMPLETE</span></h2>
+        <p class="completion-copy" id="completionCopy">Your measurements confirm the scientific relationship.</p>
+        <div class="completion-data"><div><span>CHALLENGES CLEARED</span><b id="resultChallenges">03 / 03</b></div><div><span>STAGE</span><b id="resultStage">ORIENTATION</b></div><div><span>FINAL READING</span><b id="resultMeasurement">—</b></div><div><span>PERFORMANCE RATING</span><b class="rating" id="rating">A / ANALYST</b></div></div>
+        <div class="principle-note"><span id="principleTitle">FIELD NOTE / GAS LAWS</span><p id="principleExplanation"></p></div>
+        <div class="result-actions">
+          <button class="button button-primary" id="returnHubButton">RETURN TO HUB <b>⌂</b></button>
+          <button class="button button-quiet" id="replayButton">REPLAY STAGE <b>↻</b></button>
+          <button class="button button-quiet" id="nextStageButton">NEXT STAGE <b>→</b></button>
+          <button class="button button-quiet" id="viewLogButton">VIEW OBSERVATION LOG <b>≡</b></button>
+        </div>
+      </div>
+    </div>
+    <div class="pause-overlay hidden" id="pauseOverlay" role="dialog" aria-modal="true" aria-labelledby="pauseTitle">
+      <div class="completion-card pause-card">
+        <p class="eyebrow">EXPERIMENT PAUSED</p><h2 id="pauseTitle">FIELD <span>OPTIONS</span></h2>
+        <p class="completion-copy" id="pauseStageName">Current operation</p>
+        <div class="pause-actions">
+          <button class="button button-primary" id="resumeButton">RESUME EXPERIMENT <b>▶</b></button>
+          <button class="button button-quiet" id="restartStageButton">RESTART STAGE <b>↻</b></button>
+          <button class="button button-quiet" id="pauseHubButton">RETURN TO HUB <b>⌂</b></button>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
